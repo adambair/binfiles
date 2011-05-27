@@ -1,0 +1,20 @@
+#!/bin/bash
+
+git log --numstat | awk '/^Author/ { 
+  author = $2;
+  commits[author] += 1;
+  total_commits += 1 
+};
+/^[0-9]/ { 
+  added[author] += $1; 
+  subtracted[author] += $2 
+}; 
+END { 
+  for (author in added) {
+    total_added += added[author]; 
+    total_subtracted += subtracted[author]; 
+    print author, "added", added[author], "subtracted", subtracted[author], "commits", commits[author]
+    }; 
+  print "TOTAL added", total_added, "subtracted", total_subtracted, "commits", total_commits 
+}'
+
