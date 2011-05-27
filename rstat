@@ -1,0 +1,31 @@
+#!/usr/bin/ruby
+
+require 'yaml'
+contributions = {}
+`git log --shortstat -z`.each("\0") do |commit|
+
+  commit.match(/Author: (\w+) /)
+  author = $1
+
+  commit.match(/(\d+) files changed, (\d+) insertions\(\+\), (\d+) deletions\(\-\)/)
+
+  contributions[author] ||= Hash.new(0)
+
+  contributions[author]['commits']    += 1
+  contributions[author]['files']      += $1.to_i
+  contributions[author]['insertions'] += $2.to_i
+  contributions[author]['deletions']  += $3.to_i
+end
+
+contributions[:total] = contributions.values.inject(Hash.new(0)) { |sum, elt| elt.keys.each { |k| sum[k] += elt[k] }; sum }
+
+percentages = {}
+contributions.keys.each { |name|
+   next if :total == name
+   percentages[name] ||= {}
+   %w{commits files insertions deletions}.each { |field|
+      percentages[name][field] = "%.1f%%" % (100.0 * contributions[name][field] / contributions[:total][field])
+   }
+}
+
+puts percentages.to_yaml
