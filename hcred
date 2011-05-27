@@ -1,0 +1,4 @@
+#!/usr/bin/env ruby
+
+`rm ~/.heroku/credentials`
+`ln -s ~/.heroku/credentials_#{ARGV[0]} ~/.heroku/credentials`
