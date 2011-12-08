@@ -31,17 +31,3 @@ puts "Put the number below into 'Element ID'\n"
 manifest.each do |item|
   puts " #{item[0]} x#{item[1]}"
 end
-
-# manifest = bricks.uniq.inject([]) {|parts, brick|
-
-  # # qty  = bricks.collect{|b|
-    # # # puts "brick: #{brick}"
-    # # # puts "b: #{b}"
-    # # puts  b if brick == b
-  # # }.size
-  # # part = {:brick => brick, :count => qty}
-  # # parts << part
-# }
-
-# puts manifest.inspect
-
