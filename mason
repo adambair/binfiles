@@ -1,0 +1,47 @@
+#!/usr/bin/env ruby
+
+unless ARGV[0]
+  puts 'Convert Design By Me *.lxfml files to pick a brick part lists.'
+  puts 'You can get .lxfml files by using pacifist to extract .lxf files'
+  puts ''
+  puts 'Usage:'
+  puts '  mason <filename>'
+  puts '  mason <filename> > parts.txt'
+  exit
+end
+
+require 'rubygems'
+require 'yaml'
+require 'nokogiri'
+
+f = open(ARGV[0])
+doc = Nokogiri::XML(f.read)
+f.close
+
+bricks_path = '//Bricks/Brick'
+bricks = doc.xpath(bricks_path).collect {|brick| brick['itemNos'] }.sort
+
+manifest = bricks.chunk{|y| y}.map{|y, ys| [y, ys.length]}
+
+manifest.sort!{|x,y| x[1] <=> y[1]}
+
+puts "Go to http://shop.lego.com/en-US/Pick-A-Brick-ByTheme"
+puts "Put the number below into 'Element ID'\n"
+
+manifest.each do |item|
+  puts " #{item[0]} x#{item[1]}"
+end
+
+# manifest = bricks.uniq.inject([]) {|parts, brick|
+
+  # # qty  = bricks.collect{|b|
+    # # # puts "brick: #{brick}"
+    # # # puts "b: #{b}"
+    # # puts  b if brick == b
+  # # }.size
+  # # part = {:brick => brick, :count => qty}
+  # # parts << part
+# }
+
+# puts manifest.inspect
+
