@@ -1,0 +1,10 @@
+#!/bin/bash
+
+while [ 1 ];
+  do vardate=$(date +%Y\-%m\-%d\_%H.%M.%S); 
+    screencapture -t jpg -x screenshot-$vardate.jpg; 
+    imagesnap camera-$vardate.jpg; 
+    echo screenshot-$vardate.jpg;
+    echo camera-$vardate.jpg;
+    sleep 5; 
+  done
