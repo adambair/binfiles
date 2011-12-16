@@ -1,10 +1,30 @@
 #!/bin/bash
 
+# Originally found here: http://www.mactricksandtips.com/2009/12/take-timed-lapsed-screen-shots-from-terminal.html
+# Modified by me for Ludum Dare 48 (#22)
+
+# This script will capture your desktop and take a photo every <x> seconds
+# Where <x> is the interval below.
+# Saves images to the current directory.
+
+# DEPENDENCIES
+# screencapture comes with OSX
+# imagesnap can be found here: http://iharder.sourceforge.net/current/macosx/imagesnap/
+# imagesnap can also be installed using brew: brew install imagesnap
+
+# USAGE
+# cappy (that's it)
+
+interval=5;
+screenshot_prefix=screenshot;
+camera_prefix=camera;
+
+echo Capping every $interval seconds...
 while [ 1 ];
   do vardate=$(date +%Y\-%m\-%d\_%H.%M.%S); 
-    screencapture -t jpg -x screenshot-$vardate.jpg; 
-    imagesnap camera-$vardate.jpg; 
-    echo screenshot-$vardate.jpg;
-    echo camera-$vardate.jpg;
-    sleep 5; 
+    screencapture -t jpg -x $screenshot_prefix-$vardate.jpg; 
+    imagesnap -q $camera_prefix-$vardate.jpg >> /dev/null
+    echo captured: $screenshot_prefix-$vardate.jpg;
+    echo captured: $camera_prefix-$vardate.jpg;
+    sleep $interval; 
   done
