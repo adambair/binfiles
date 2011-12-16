@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Originally found here: http://www.mactricksandtips.com/2009/12/take-timed-lapsed-screen-shots-from-terminal.html
-# Modified by me for Ludum Dare 48 (#22)
+# Modified by me for Ludum Dare (#22)
 
 # This script will capture your desktop and take a photo every <x> seconds
 # Where <x> is the interval below.
