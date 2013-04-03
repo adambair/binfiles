@@ -2,7 +2,7 @@
 
 unless ARGV[0]
   puts 'Convert Design By Me *.lxfml files to pick a brick part lists.'
-  puts 'You can get .lxfml files by using pacifist to extract .lxf files'
+  puts 'You can get .lxfml files by using unarchiver to extract .lxf files'
   puts ''
   puts 'Usage:'
   puts '  mason <filename>'
