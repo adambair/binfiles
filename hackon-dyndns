@@ -1,0 +1,22 @@
+#!/usr/bin/env sh
+
+# linode.com, home-made dynamic dns
+
+# KALNET_API_KEY
+# KALNET_DOMAIN_ID
+# KALNET_RESOURCE_ID
+# KALNET_IP_ADDRESS
+
+export KALNET_IP_ADDRESS=$(curl -s ipecho.net/plain ; echo)
+
+kalnet="https://api.linode.com/?api_key=$KALNET_API_KEY&api_action=domain.resource.update&domainid=$KALNET_DOMAIN_ID&resourceid=$KALNET_RESOURCE_ID&target=$KALNET_IP_ADDRESS"
+# pollux="https://api.linode.com/?api_key=$KALNET_API_KEY&api_action=domain.resource.update&domainid=$KALNET_DOMAIN_ID&resourceid=$KALNET_POLLUX_RESOURCE_ID&target=$KALNET_IP_ADDRESS"
+
+echo ""
+echo $(DATE) : curl - $kalnet
+curl -s $kalnet
+echo ""
+# echo $(DATE) : curl -s $pollux
+# curl -s $pollux
+# echo ""
+

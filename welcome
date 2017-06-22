@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+
+echo "$(whoami) @ $(hostname -s)" | toilet -d /usr/local/share/figlet/fonts -t -f cosmic | lolcat
+echo ""
+date +"%m/%d/%Y  %r"
+echo ""
+fortune -s

@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+say -v Daniel -r 200 $*

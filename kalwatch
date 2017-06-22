@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+# fswatch -r spec app | xargs -n1 -I{} spring rspec $(grep -rnwl 'spec' -e 'new_onramps: true') --format documentation --no-profile
+
+if [ $# -eq 0 ]
+then
+  printf 'Usage: kalwatch [files or directories]\n\n'
+  # printf "  -s, --spring\t\t\tRun specs using spring (Rails preloader)\n"
+  exit
+fi
+
+echo "kalwatch "
+
+files=
+
+while [ $# -gt 0 ]
+  do
+    case "$1" in
+      -v) vflag=on;;
+      -w) files="${files} $2"; shift;;
+      -*) echo >&2 \
+          "usage: $0 [-v] [-f file] [file ...]"
+          exit 1;;
+       *) break;;	# terminate while loop
+    esac
+  shift
+done
+
+echo ${files}
+
+# fswatch -r spec app | xargs -n1 -I{} $@

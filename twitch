@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+if [ $# -eq 0 ]
+then
+  printf "Usage: twitch [url]\n\n"
+  exit
+fi
+
+livestreamer https://www.twitch.tv/$1 source --player-passthrough hls
+

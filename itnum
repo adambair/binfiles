@@ -1,0 +1,22 @@
+#!/usr/bin/env ruby --disable-gems
+
+# Installation Instructions:
+# Create a file ~/bin/iternum with this content in it and chmod u+x
+# ~/bin/iternum. Then make sure that ~/bin is in your PATH environment
+# variable and you should be good to go.
+
+WEEKS_IN_ITERATION=2
+
+def week_number
+  # Note: Please see 'man 3 strftime' for details on the custom formatting used
+  # with the 'date' command. The option I used gets the week number of the
+  # year assuming weeks start on Monday and that it returns a decimal between
+  # 01-53.
+  `date "+%V"`.to_i
+end
+
+def iteration_number(week_number)
+  week_number / WEEKS_IN_ITERATION
+end
+
+puts iteration_number(week_number)

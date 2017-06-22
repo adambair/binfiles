@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+say -v Karen -r 180 $*

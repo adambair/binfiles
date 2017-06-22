@@ -1,0 +1,4 @@
+
+#!/usr/bin/env bash
+
+ps ax | awk '/unicorn|nginx|redis|thin|spring|mailcatcher/ && !/awk/ {print $1}' | sudo xargs kill -9
